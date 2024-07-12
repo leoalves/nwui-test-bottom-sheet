@@ -7,6 +7,7 @@ import { Linking, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text } from '~/components/nativewindui/Text';
+import BottomSheetExample from '~/components/test/BottomSheetExample';
 import { useColorScheme } from '~/lib/useColorScheme';
 import { useHeaderSearchBar } from '~/lib/useHeaderSearchBar';
 
@@ -46,9 +47,9 @@ function ListEmptyComponent() {
   const height = dimensions.height - headerHeight - insets.bottom - insets.top;
 
   return (
-    <View style={{ height }} className="flex-1 items-center justify-center gap-1 px-12">
+    <View style={{ height }} className="items-center justify-center flex-1 gap-1 px-12">
       <Icon name="file-plus-outline" size={42} color={colors.grey} />
-      <Text variant="title3" className="pb-1 text-center font-semibold">
+      <Text variant="title3" className="pb-1 font-semibold text-center">
         No Components Installed
       </Text>
       <Text color="tertiary" variant="subhead" className="pb-4 text-center">
@@ -86,8 +87,8 @@ function renderItem({ item }: { item: ComponentItem }) {
 function Card({ children, title }: { children: React.ReactNode; title: string }) {
   return (
     <View className="px-4">
-      <View className="gap-4 rounded-xl border border-border bg-card p-4 pb-6 shadow-sm shadow-black/10 dark:shadow-none">
-        <Text className="text-center text-sm font-medium tracking-wider opacity-60">{title}</Text>
+      <View className="gap-4 p-4 pb-6 border shadow-sm rounded-xl border-border bg-card shadow-black/10 dark:shadow-none">
+        <Text className="text-sm font-medium tracking-wider text-center opacity-60">{title}</Text>
         {children}
       </View>
     </View>
@@ -96,14 +97,8 @@ function Card({ children, title }: { children: React.ReactNode; title: string })
 
 const COMPONENTS: ComponentItem[] = [
   // ADD ANY ADDITIONAL COMPONENTS HERE
-  // {
-  //   name: 'Component Name',
-  //   component: function ComponentNameExample() {
-  //     return (
-  //       <View>
-  //         <Text>Component Example</Text>
-  //       </View>
-  //     );
-  //   },
-  // },
+  {
+    name: 'Bottom Sheet Example',
+    component: BottomSheetExample
+  },
 ];

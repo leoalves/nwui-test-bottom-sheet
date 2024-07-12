@@ -1,5 +1,7 @@
 import '../global.css';
 import 'expo-dev-client';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider as NavThemeProvider } from '@react-navigation/native';
 import { Icon } from '@roninoss/icons';
 import { Link, Stack } from 'expo-router';
@@ -27,13 +29,18 @@ export default function RootLayout() {
         style={isDarkColorScheme ? 'light' : 'dark'}
       />
       {/* WRAP YOUR APP WITH ANY ADDITIONAL PROVIDERS HERE */}
-
-      <NavThemeProvider value={NAV_THEME[colorScheme]}>
-        <Stack screenOptions={SCREEN_OPTIONS}>
-          <Stack.Screen name="index" options={INDEX_OPTIONS} />
-          <Stack.Screen name="modal" options={MODAL_OPTIONS} />
-        </Stack>
-      </NavThemeProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <NavThemeProvider value={NAV_THEME[colorScheme]}>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+                <Stack screenOptions={SCREEN_OPTIONS}>
+                  <Stack.Screen name="index" options={INDEX_OPTIONS} />
+                  <Stack.Screen name="modal" options={MODAL_OPTIONS} />
+                </Stack>
+              </GestureHandlerRootView>
+          </NavThemeProvider>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>      
     </>
   );
 }
